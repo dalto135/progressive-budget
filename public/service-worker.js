@@ -4,7 +4,7 @@ const FILES_TO_CACHE = [
   // '/favorites.html',
   // '/topic.html',
   '/style.css',
-  // '/dist/app.bundle.js',
+  '/dist/index.bundle.js',
   // '/dist/favorites.bundle.js',
   // '/dist/topic.bundle.js',
   'https://fonts.googleapis.com/css?family=Istok+Web|Montserrat:800&display=swap',

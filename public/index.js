@@ -1,3 +1,5 @@
+import { checkForIndexedDb, useIndexedDb } from '../public/assets/js/indexedDb';
+
 let transactions = [];
 let myChart;
 
