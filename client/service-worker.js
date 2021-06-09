@@ -3,7 +3,7 @@ const FILES_TO_CACHE = [
   './index.html',
   // '/favorites.html',
   // '/topic.html',
-  './assets/css/style.css',
+  './assets/css/styles.css',
   './dist/index.bundle.js',
   // '/dist/favorites.bundle.js',
   // '/dist/topic.bundle.js',

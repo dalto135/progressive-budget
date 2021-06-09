@@ -3,8 +3,6 @@ import { checkForIndexedDb, useIndexedDb } from './indexedDb';
 let transactions = [];
 let myChart;
 
-// alert('index.js');
-
 fetch("/api/transaction")
   .then(response => {
     return response.json();
