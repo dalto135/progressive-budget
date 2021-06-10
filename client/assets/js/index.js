@@ -1,4 +1,4 @@
-import { checkForIndexedDb, useIndexedDb } from './indexedDb';
+// import { saveRecord } from './indexedDb';
 
 let transactions = [];
 let myChart;
@@ -123,7 +123,7 @@ function sendTransaction(isAdding) {
       "Content-Type": "application/json"
     }
   })
-  .then(response => {    
+  .then(response => {
     return response.json();
   })
   .then(data => {
@@ -153,3 +153,11 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
+
+
+//My code
+function saveRecord(transaction) {
+  if (checkForIndexedDb()) {
+    useIndexedDb("budget", "transactions", "get", transaction);
+  }
+}

@@ -46,3 +46,9 @@ export function useIndexedDb(databaseName, storeName, method, object) {
     };
   });
 }
+
+// export function saveRecord(transaction) {
+//   console.log(transaction.name);
+//   console.log(transaction.value);
+//   console.log(transaction.date);
+// }
