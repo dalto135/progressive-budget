@@ -1,4 +1,11 @@
-// import { saveRecord } from './indexedDb';
+import { checkForIndexedDb, useIndexedDb } from './indexedDb';
+
+//My code
+function saveRecord(transaction) {
+  if (checkForIndexedDb()) {
+    useIndexedDb("budget", "transactions", "get", transaction);
+  }
+}
 
 let transactions = [];
 let myChart;
@@ -153,11 +160,3 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
-
-
-//My code
-function saveRecord(transaction) {
-  if (checkForIndexedDb()) {
-    useIndexedDb("budget", "transactions", "get", transaction);
-  }
-}
