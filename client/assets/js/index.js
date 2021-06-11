@@ -1,10 +1,13 @@
-import { checkForIndexedDb, useIndexedDb } from './indexedDb';
+import { checkForIndexedDb, useIndexedDb, retrieveData } from './indexedDb';
 
 //My code
 function saveRecord(transaction) {
   // console.log(transaction);
   if (checkForIndexedDb()) {
     useIndexedDb("budget", "transactions", "put", transaction);
+    // let data = retrieveData('budget', 'transactions')
+    // console.log('data.result');
+    // console.log(data);
   }
 }
 
@@ -131,13 +134,15 @@ function sendTransaction(isAdding) {
     headers: {
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json"
-    }
+    },
   })
   .then(response => {
     console.log('response');
     return response.json();
   })
   .then(data => {
+    //
+    //
     console.log('data');
     if (data.errors) {
       errorEl.textContent = "Missing Information";
@@ -166,3 +171,5 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
+
+
