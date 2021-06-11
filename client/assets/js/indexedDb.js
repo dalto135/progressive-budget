@@ -159,12 +159,16 @@ window.addEventListener("click", function() {
           let indexedDBLength = indexedDBContent.length;
           console.log('indexedDBLength');
           console.log(indexedDBLength);
-
+          // debugger
           if(indexedDBLength) {
-            indexedDBContent.forEach(i => {
+            let boo = false;
+            for (let i = 0; i < indexedDBLength; i++) {
+
+            // }
+            // indexedDBContent.forEach(i => {
               fetch("/api/transaction", {
                 method: "POST",
-                body: JSON.stringify(i),
+                body: JSON.stringify(indexedDBContent[i]),
                 headers: {
                   Accept: "application/json, text/plain, */*",
                   "Content-Type": "application/json"
@@ -175,7 +179,7 @@ window.addEventListener("click", function() {
                 return response.json();
               })
               .then(data => {
-                //
+                
                 console.log('data');
                 if (data.errors) {
                   errorEl.textContent = "Missing Information";
@@ -186,16 +190,23 @@ window.addEventListener("click", function() {
                   // amountEl.value = "";
                 }
               })
+              .then(
+                boo = true  
+              )
               .catch(err => {
                 // fetch failed, so save in indexed db
                 // saveRecord(transaction);
                 // clear form
+                // boo = false;
                 console.log(err.message);
                 // nameEl.value = "";
                 // amountEl.value = "";
               });
-            })
-            store.clear();
+              
+            }
+            if (boo === true) {
+              store.clear();
+            }
           }
         };
       
