@@ -2,8 +2,9 @@ import { checkForIndexedDb, useIndexedDb } from './indexedDb';
 
 //My code
 function saveRecord(transaction) {
+  // console.log(transaction);
   if (checkForIndexedDb()) {
-    useIndexedDb("budget", "transactions", "get", transaction);
+    useIndexedDb("budget", "transactions", "put", transaction);
   }
 }
 
@@ -122,6 +123,8 @@ function sendTransaction(isAdding) {
   populateTotal();
   
   // also send to server
+  // debugger
+  console.log('fetch');
   fetch("/api/transaction", {
     method: "POST",
     body: JSON.stringify(transaction),
@@ -131,9 +134,11 @@ function sendTransaction(isAdding) {
     }
   })
   .then(response => {
+    console.log('response');
     return response.json();
   })
   .then(data => {
+    console.log('data');
     if (data.errors) {
       errorEl.textContent = "Missing Information";
     }
@@ -145,6 +150,7 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
+    // console.log('hello');
     saveRecord(transaction);
 
     // clear form
