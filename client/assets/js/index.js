@@ -1,13 +1,9 @@
-import { checkForIndexedDb, useIndexedDb, retrieveData } from './indexedDb';
+import { checkForIndexedDb, useIndexedDb } from './indexedDb';
 
 //My code
 function saveRecord(transaction) {
-  // console.log(transaction);
   if (checkForIndexedDb()) {
     useIndexedDb("budget", "transactions", "put", transaction);
-    // let data = retrieveData('budget', 'transactions')
-    // console.log('data.result');
-    // console.log(data);
   }
 }
 
@@ -126,7 +122,6 @@ function sendTransaction(isAdding) {
   populateTotal();
   
   // also send to server
-  // debugger
   console.log('fetch');
   fetch("/api/transaction", {
     method: "POST",
@@ -141,8 +136,6 @@ function sendTransaction(isAdding) {
     return response.json();
   })
   .then(data => {
-    //
-    //
     console.log('data');
     if (data.errors) {
       errorEl.textContent = "Missing Information";
@@ -155,7 +148,6 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    // console.log('hello');
     saveRecord(transaction);
     // clear form
     nameEl.value = "";
