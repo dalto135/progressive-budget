@@ -3,7 +3,7 @@ import { checkForIndexedDb, useIndexedDb } from './indexedDb';
 //My code
 function saveRecord(transaction) {
   if (checkForIndexedDb()) {
-    useIndexedDb("budget", "transactions", "put", transaction);
+    useIndexedDb("budget" || process.env.MONGODB_URI, "transactions", "put", transaction);
   }
 }
 
