@@ -114,7 +114,7 @@ export function retrieveData(databaseName, storeName) {
 
 window.addEventListener("click", function() {
 
-  return new Promise((resolve, reject) => {
+  // return new Promise((resolve, reject) => {
     const request = window.indexedDB.open('budget', 1);
     // console.log('request');
     // console.log(request);
@@ -161,11 +161,14 @@ window.addEventListener("click", function() {
           console.log(indexedDBLength);
           // debugger
           if(indexedDBLength) {
-            let boo = true;
+            let boo = false;
+            let poo = false;
+            // debugger
             for (let i = 0; i < indexedDBLength; i++) {
 
             // }
             // indexedDBContent.forEach(i => {
+              // debugger
               fetch("/api/transaction", {
                 method: "POST",
                 body: JSON.stringify(indexedDBContent[i]),
@@ -173,40 +176,58 @@ window.addEventListener("click", function() {
                   Accept: "application/json, text/plain, */*",
                   "Content-Type": "application/json"
                 },
-              }, 
-              // boo = true
+              },
+              
+                boo = Response
+              
               )
               .then(response => {
                 console.log('response');
+                console.log(response);
+                if (response.ok) {
+                  boo = true;
+                  console.log('boo');
+                  console.log(boo);
+                }
                 return response.json();
               })
+              // .then(ye => {
+              //   if (boo === true) {
+              //     store.clear();
+              //   }
+              // })
               .then(data => {
                 
                 console.log('data');
+                console.log(data);
                 if (data.errors) {
                   errorEl.textContent = "Missing Information";
                 }
               })
-              // .then(ye => {
-              //   if (i === indexedDBLength) {
-              //     boo = true;
-              //   }
-              // })
+              .then(ye => {
+                if (boo === true) {
+                  poo = true;
+                  console.log('poo');
+                  console.log(poo);
+                  
+                }
+              })
               .catch(err => {
                 // fetch failed, so save in indexed db
                 // saveRecord(transaction);
                 // clear form
                 // boo = false;
                 console.log(err.message);
-                boo = false;
+                // boo = false;
                 // nameEl.value = "";
                 // amountEl.value = "";
               });
               
             }
-            if (boo === true) {
+            if (navigator.onLine) {
               store.clear();
             }
+            
           }
         };
       
@@ -217,5 +238,5 @@ window.addEventListener("click", function() {
     //   console.log(e);
     // }
     
-  });
+  // });
 })
